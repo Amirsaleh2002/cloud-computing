@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: .
+    container_name: restaurant
+    ports:
+      - '3000:3000'  # استفاده از پورت 3000 برای دسترسی به سرویس
+    environment:
+      - PORT=3000
+      - PG_HOST=db  # به db اشاره می‌کند که از سرویس دوم در فایل دیگر می‌آید
+      - PG_PORT=5432
+      - PG_DATABASE=restaurant
+      - PG_USER=postgres
+      - PG_PASSWORD=12345
+    volumes: 
+	- .:/app
+	- /app/node_modules
+    networks:
+      - saleh-network
+
+networks:
+  saleh-network:
+    external: true
+

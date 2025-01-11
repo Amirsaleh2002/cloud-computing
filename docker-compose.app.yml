@@ -6,21 +6,20 @@ services:
       context: .
     container_name: restaurant
     ports:
-      - '3000:3000'  # استفاده از پورت 3000 برای دسترسی به سرویس
+      - '${PORT}:${PORT}'  # استفاده از متغیر PORT از فایل .env
     environment:
-      - PORT=3000
-      - PG_HOST=db  # به db اشاره می‌کند که از سرویس دوم در فایل دیگر می‌آید
-      - PG_PORT=5432
-      - PG_DATABASE=restaurant
-      - PG_USER=postgres
-      - PG_PASSWORD=12345
+      - PORT=${PORT}
+      - PG_HOST=${PG_HOST}
+      - PG_PORT=${PG_PORT}
+      - PG_DATABASE=${PG_DATABASE}
+      - PG_USER=${PG_USER}
+      - PG_PASSWORD=${PG_PASSWORD}
     volumes: 
-	- .:/app
-	- /app/node_modules
+      - .:/app
+      - /app/node_modules
     networks:
       - saleh-network
 
 networks:
   saleh-network:
     external: true
-
